@@ -12,7 +12,13 @@ public class Account {
 	public Account() {
 	}
 	
-	public Account(Integer number, String holder, Double balance, Double withdrawLimit) {
+	public Account(Integer number, String holder, Double balance, Double withdrawLimit) throws AccountException{
+		if(holder == null || holder.isEmpty()) {
+			throw new AccountException("Please fill in the name of the holder.");
+		}
+		if(holder.matches("\\d+")) {
+			throw new AccountException("Invalid holder: The holder name field accepts only letters.");
+		}
 		this.number = number;
 		this.holder = holder;
 		this.balance = balance;
